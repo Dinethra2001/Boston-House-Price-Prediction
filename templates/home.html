@@ -1,3 +1,130 @@
-<h1>
-    Hello World!
-</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Boston House Price Predictor</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+      background-color: #ffffff;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 650px;
+      background: #fff;
+      padding: 30px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      border-radius: 10px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    label {
+      font-weight: bold;
+      margin-top: 15px;
+      display: block;
+      color: #444;
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      margin-top: 25px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      font-size: 16px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+  </style>
+</head>
+<body onload="resetForm()">
+
+  <div class="container">
+    <h1>Boston House Price Predictor</h1>
+    <form id="prediction-form" action="{{ url_for('predict') }}" method="post">
+      <label>Per capita crime rate by town (CRIM)</label>
+      <input type="text" name="CRIM" required />
+
+      <label>Proportion of residential land zoned for lots over 25,000 sq.ft. (ZN)</label>
+      <input type="text" name="ZN" required />
+
+      <label>Proportion of non-retail business acres per town (INDUS)</label>
+      <input type="text" name="INDUS" required />
+
+      <label>Charles River dummy variable (1 if tract bounds river; 0 otherwise) (CHAS)</label>
+      <input type="text" name="CHAS" required />
+
+      <label>Nitric oxides concentration (NOX)</label>
+      <input type="text" name="NOX" required />
+
+      <label>Average number of rooms per dwelling (RM)</label>
+      <input type="text" name="RM" required />
+
+      <label>Proportion of owner-occupied units built prior to 1940 (AGE)</label>
+      <input type="text" name="Age" required />
+
+      <label>Weighted distances to five Boston employment centres (DIS)</label>
+      <input type="text" name="DIS" required />
+
+      <label>Index of accessibility to radial highways (RAD)</label>
+      <input type="text" name="RAD" required />
+
+      <label>Full-value property-tax rate per $10,000 (TAX)</label>
+      <input type="text" name="TAX" required />
+
+      <label>Pupil-teacher ratio by town (PTRATIO)</label>
+      <input type="text" name="PTRATIO" required />
+
+      <label>1000(Bk - 0.63)^2 where Bk is the proportion of blacks by town (B)</label>
+      <input type="text" name="B" required />
+
+      <label>Percentage of lower status of the population (LSTAT)</label>
+      <input type="text" name="LSTAT" required />
+
+      <button type="submit">Predict</button>
+    </form>
+  </div>
+
+  {% if prediction_text %}
+  <script>
+    alert("{{ prediction_text }}");
+  </script>
+  {% endif %}
+
+  <script>
+    // Clear form inputs when page is reloaded
+    function resetForm() {
+      document.getElementById("prediction-form").reset();
+    }
+  </script>
+
+</body>
+</html>
